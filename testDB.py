@@ -19,11 +19,13 @@ def main():
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
 
-    text = collection.find_one({'url': 'http://www.rongmofang.com/home/huifushenglibao'} )
-    if not text:
+    document_sample = collection.find_one({'url': "http://www.rongmofang.com/information/infolist?infotype=1&page=0"} )
+    if not document_sample:
         print "no document found."
     else:
-        print "document found,and has internal url: ", text['url_internal']
+        print "document found,and has text: ", document_sample['text']
+        print "document found,and has internal url: ", document_sample['url_internal']
+        print "document found,and has external url: ", document_sample['url_external']
 
 if __name__ == "__main__":
     main()
